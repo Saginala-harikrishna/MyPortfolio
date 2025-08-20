@@ -272,6 +272,98 @@
             line-height: 1.5;
         }
 
+        /* Education Cards */
+        .education-card {
+            width: 300px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(40, 40, 80, 0.7);
+        }
+
+        .education-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .education-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .education-institution {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .education-details {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        /* Certification Cards */
+        .certification-card {
+            width: 300px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(40, 40, 80, 0.7);
+        }
+
+        .certification-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .certification-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .certification-issuer {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .certification-date {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 15px;
+        }
+
+        .certification-desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
         /* Greeting Section */
         .greeting {
             padding: 100px 20px;
@@ -379,6 +471,89 @@
         </div>
     </div>
 
+    <!-- Education Section -->
+    <section class="section" id="educationSection">
+        <h2 class="section-title">Education</h2>
+        <div class="cards-grid">
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="education-title">Bachelor of Technology</h3>
+                <div class="education-institution">Jawaharlal Nehru Technological University Anantapur</div>
+                <div class="education-details">
+                    <p>Computer Science Engineering</p>
+                    <p>2024 - Present</p>
+                    <p>CGPA: 8.3 (Current)</p>
+                </div>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3 class="education-title">Diploma</h3>
+                <div class="education-institution">Sri Venkateswara Government Polytechnic, Tirupati </div>
+                <div class="education-details">
+                    <p>Computer Engineering</p>
+                    <p>2021 - 2024</p>
+                    <p>Percentage: 94%</p>
+                </div>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h3 class="education-title">Secondary School</h3>
+                <div class="education-institution">Sri Maharashi High School, P</div>
+                <div class="education-details">
+                    <p>State Board</p>
+                    <p>2020 - 2021</p>
+                    <p>GPA: 10</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certification Section -->
+    <section class="section" id="certificationSection">
+        <h2 class="section-title">Certifications</h2>
+        <div class="cards-grid">
+            <div class="certification-card">
+                <div class="certification-icon">
+                   
+                </div>
+                <h3 class="certification-title">Network Basics</h3>
+                <div class="certification-issuer">Cisco Networking Academy</div>
+                <div class="certification-date">Issued: Apr 18 2025</div>
+                <p class="certification-desc">This course deepened my understanding of essential networking concepts like IP addressing, routing, switching, and more. The hands-on experience with Cisco Packet Tracer made learning both practical and engaging.</p>
+            </div>
+            
+            <div class="certification-card">
+                <div class="certification-icon">
+                   
+                </div>
+                <h3 class="certification-title">TCS iON Career Edge – Young Professional program</h3>
+                <div class="certification-issuer">TCS</div>
+                <div class="certification-date">Issued: Apr 27 2025</div>
+                <p class="certification-desc">Completed the Professional Program by Tata Consultancy Services, gaining workplace readiness skills in communication, soft skills, resume writing, business etiquette, and career guidance. Also enhanced my knowledge in IT fundamentals, accounting basics, and an introduction to AI for professional growth.</p>
+            </div>
+            
+            <div class="certification-card">
+                <div class="certification-icon">
+                  
+                </div>
+                <h3 class="certification-title">Python Programming</h3>
+                <div class="certification-issuer">Cisco Networking Academy </div>
+                <div class="certification-date">Issued:  Apr 8 2025</div>
+                <p class="certification-desc">This course provided a solid foundation in Python programming, covering essential concepts such as variables, data types, control structures (if-else, loops), functions, and basic data structures like lists and dictionaries. The program also introduced problem-solving techniques using Python, which are fundamental for cybersecurity tasks and automation.</p>
+            </div>
+            
+        
+        </div>
+    </section>
+
     <!-- Social Media Section -->
     <section class="section" id="socialSection">
         <h2 class="section-title">Connect With Me</h2>
@@ -467,8 +642,6 @@
      alt="To-Do List App"
      class="project-image">
 
-
-
                 <div class="project-content">
                     <h3 class="project-title">TO-DO-LIST</h3>
                     <p class="project-desc"> A To-Do List app that helps users organize tasks, set priorities, and boost productivity.</p>
@@ -488,6 +661,8 @@
             const character = document.getElementById('character');
             const details = document.getElementById('details');
             const bgPattern = document.getElementById('bgPattern');
+            const educationSection = document.getElementById('educationSection');
+            const certificationSection = document.getElementById('certificationSection');
             const socialSection = document.getElementById('socialSection');
             const projectsSection = document.getElementById('projectsSection');
             
@@ -502,7 +677,7 @@
 
             // Scroll animation for sections
             function checkScroll() {
-                const sections = [socialSection, projectsSection];
+                const sections = [educationSection, certificationSection, socialSection, projectsSection];
                 
                 sections.forEach(section => {
                     const sectionPosition = section.getBoundingClientRect().top;
