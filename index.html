@@ -53,7 +53,7 @@
       padding: calc(var(--container-padding) * 2);
       margin: 36px auto;
     }
-
+    
     header {
       display: flex;
       align-items: center;
@@ -256,17 +256,34 @@
       display:flex;
       gap:12px;
       align-items:flex-start;
-      background:#fff;
+     
       padding:12px;
       border-radius:10px;
       border:1px solid rgba(15,23,42,0.03);
       box-shadow:var(--shadow);
     }
-    .timeline-left{ width:8px; height:8px; margin-top:6px; border-radius:50%; background:var(--accent); flex:0 0 12px; }
+    .timeline-left{ 
+      width: 12px; 
+      height: 12px; 
+      margin-top:6px; 
+    
+     
+    }
+    .fas,.fab {
+    color: #0f62fe;
+}
+  
+    .timeline-body{ flex: 1; }
     .timeline-body h4{ margin:0; font-size:1rem; }
     .timeline-meta{ color:var(--muted); font-size:0.9rem; margin-top:6px; }
 
     /* Contact */
+    #contact {
+      margin-top: 30px;
+      margin-left: 0;
+      max-width: 100%;
+    }
+    
     .contact-grid{
       display:flex;
       gap:20px;
@@ -291,23 +308,71 @@
       padding-bottom:40px;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 950px){
-      .hero{ grid-template-columns: 1fr; }
-      .two-col{ grid-template-columns: 1fr; }
-      .projects-grid{ grid-template-columns: repeat(2, 1fr); }
+    /* Certification */
+    .cert-thumb {
+      width: 100px;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease;
     }
-    @media (max-width: 600px){
-      .projects-grid{ grid-template-columns: 1fr; }
-      header{ flex-direction:column; align-items:flex-start; gap:14px; }
-      .wrap{ padding:16px; }
-      .brand p{ display:none; }
+
+    .cert-thumb:hover {
+      transform: scale(1.05);
+    }
+
+    /* Overlay for fullscreen display */
+    #cert-overlay {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #cert-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+      cursor: zoom-out;
     }
 
     .muted{ color:var(--muted); font-size:0.95rem; }
     .center{ text-align:center; }
     a.u{ color:inherit; text-decoration:underline; text-decoration-color: rgba(2,6,23,0.04); }
 
+    /* Responsive adjustments */
+    @media (max-width: 950px){
+      .hero{ grid-template-columns: 1fr; }
+      .two-col{ grid-template-columns: 1fr; }
+      .projects-grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    @media (max-width: 768px){
+      .projects-grid{ grid-template-columns: 1fr; }
+      .hero-cta{ flex-direction: column; align-items: flex-start; }
+      .profile-card{ flex-direction: column; text-align: center; }
+      .skills-grid{ justify-content: center; }
+    }
+    
+    @media (max-width: 600px){
+      header{ flex-direction:column; align-items:flex-start; gap:14px; }
+      .wrap{ padding:16px; }
+      .brand p{ display:none; }
+      nav{ flex-wrap: wrap; }
+      .section{ padding: 16px; }
+      .timeline-item{ flex-direction: column; }
+      .timeline-left{ align-self: flex-start; }
+      
+    }
   </style>
 </head>
 <body>
@@ -350,7 +415,7 @@
           <a class="btn btn-outline" href="#projects" aria-label="View projects">
             <i class="fa-solid fa-book-open"></i> View Projects
           </a>
-          <a class="btn" href="mailto:saginalaharikrishna6@gmail.com.com" style="background:#f3f4f6;border-radius:10px;font-weight:700;">
+          <a class="btn" href="mailto:saginalaharikrishna6@gmail.com" style="background:#f3f4f6;border-radius:10px;font-weight:700;">
             <i class="fa-solid fa-envelope"></i> Email Me
           </a>
         </div>
@@ -369,54 +434,49 @@
 
     <!-- About + Skills -->
     <section class="section" id="about" aria-labelledby="about-title">
-  <h3 class="title" id="about-title">About</h3>
+      <h3 class="title" id="about-title">About</h3>
 
-  <!-- About Card -->
-  <div class="card" style="margin-bottom:20px;">
-    <p class="about-text">
-      Hello! I'm <strong>Saginala Hari Krishna</strong>, a third-year Computer Science student with experience building
-      web applications front-to-back. I enjoy converting ideas into code, focusing on clean design and reliable engineering.
-      My notable work includes building a Smart Store Management System, a Student-to-Student Marketplace, an Expense Tracker,
-      and a Weather App. I'm actively improving my backend skills (Node.js & MySQL) and learning cybersecurity basics.
-    </p>
+      <!-- About Card -->
+      <div class="card" style="margin-bottom:20px;">
+        <p class="about-text">
+          Hello! I'm <strong>Saginala Hari Krishna</strong>, a third-year Computer Science student with experience building
+          web applications front-to-back. I enjoy converting ideas into code, focusing on clean design and reliable engineering.
+          My notable work includes building a Smart Store Management System, a Student-to-Student Marketplace, an Expense Tracker,
+          and a Weather App. I'm actively improving my backend skills (Node.js & MySQL) and learning cybersecurity basics.
+        </p>
 
-    <div style="margin-top:14px;">
-      <strong>Looking for:</strong>
-      <p class="muted" style="margin-top:8px;">Internships | Collaborations | Open-source contributions</p>
-    </div>
-  </div>
+        <div style="margin-top:14px;">
+          <strong>Looking for:</strong>
+          <p class="muted" style="margin-top:8px;">Internships | Collaborations | Open-source contributions</p>
+        </div>
+      </div>
 
-  <!-- Skills Card -->
-  <aside class="card" id="skills" aria-labelledby="skills-title" style="margin-bottom:20px;">
-    <h4 class="title" id="skills-title">Skills</h4>
-    <div style="display:flex; flex-direction:row; gap:10px;">
-      <div class="skill-card"><i class="fa-brands fa-html5" style="color:#E44D26;"></i><span>HTML</span></div>
-      <div class="skill-card"><i class="fa-brands fa-css3-alt" style="color:#1572B6;"></i><span>CSS</span></div>
-      <div class="skill-card"><i class="fa-brands fa-js-square" style="color:#F7DF1E;"></i><span>JavaScript</span></div>
-      <div class="skill-card"><i class="fa-brands fa-react" style="color:#61DAFB;"></i><span>React.js</span></div>
-      <div class="skill-card"><i class="fa-brands fa-node-js" style="color:#339933;"></i><span>Node.js</span></div>
-      <div class="skill-card"><i class="fa-solid fa-database" style="color:#4479A1;"></i><span>MySQL</span></div>
-      <div class="skill-card"><i class="fa-brands fa-python" style="color:#3776AB;"></i><span>Python</span></div>
-      <div class="skill-card"><i class="fa-brands fa-github"></i><span>Git & GitHub</span></div>
-    </div>
-  </aside>
+      <!-- Skills Card -->
+      <aside class="card" id="skills" aria-labelledby="skills-title" style="margin-bottom:20px;">
+        <h4 class="title" id="skills-title">Skills</h4>
+        <div class="skills-grid">
+          <div class="skill-card"><i class="fa-brands fa-html5" style="color:#E44D26;"></i><span>HTML</span></div>
+          <div class="skill-card"><i class="fa-brands fa-css3-alt" style="color:#1572B6;"></i><span>CSS</span></div>
+          <div class="skill-card"><i class="fa-brands fa-js-square" style="color:#F7DF1E;"></i><span>JavaScript</span></div>
+          <div class="skill-card"><i class="fa-brands fa-react" style="color:#61DAFB;"></i><span>React.js</span></div>
+          <div class="skill-card"><i class="fa-brands fa-node-js" style="color:#339933;"></i><span>Node.js</span></div>
+          <div class="skill-card"><i class="fa-solid fa-database" style="color:#4479A1;"></i><span>MySQL</span></div>
+          <div class="skill-card"><i class="fa-brands fa-python" style="color:#3776AB;"></i><span>Python</span></div>
+          <div class="skill-card"><i class="fa-brands fa-github"></i><span>Git & GitHub</span></div>
+        </div>
+      </aside>
 
-  <!-- Tools Card -->
-  <aside class="card" aria-labelledby="tools-title">
-    <h4 class="title" id="tools-title">Tools</h4>
-    <div style="display:flex; flex-direction:row; gap:10px;">
-      <div class="skill-card"><i class="fa-solid fa-code"></i><span>VSCode</span></div>
-      <div class="skill-card"><i class="fa-solid fa-paper-plane"></i><span>Postman</span></div>
-      <div class="skill-card"><i class="fa-brands fa-linux"></i><span>Linux</span></div>
-      <div class="skill-card"><i class="fa-solid fa-network-wired"></i><span>Cisco Packet Tracer</span></div>
-    </div>
-  </aside>
-</section>
-
-
-    
-
-
+      <!-- Tools Card -->
+      <aside class="card" aria-labelledby="tools-title">
+        <h4 class="title" id="tools-title">Tools</h4>
+        <div class="skills-grid">
+          <div class="skill-card"><i class="fa-solid fa-code"></i><span>VSCode</span></div>
+          <div class="skill-card"><i class="fa-solid fa-paper-plane"></i><span>Postman</span></div>
+          <div class="skill-card"><i class="fa-brands fa-linux"></i><span>Linux</span></div>
+          <div class="skill-card"><i class="fa-solid fa-network-wired"></i><span>Cisco Packet Tracer</span></div>
+        </div>
+      </aside>
+    </section>
 
     <!-- Projects -->
     <section class="section" id="projects" aria-labelledby="projects-title">
@@ -473,7 +533,7 @@
       </div>
 
       <div style="margin-top:14px;">
-        <a class="u" href="#projects" aria-hidden="true">See more on GitHub →</a>
+        <a class="u" href="https://github.com/Saginala-harikrishna" aria-hidden="true">See more on GitHub →</a>
       </div>
     </section>
 
@@ -482,7 +542,7 @@
       <h3 class="title" id="education-title">Education</h3>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-left"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="timeline-left"><i class="fas fa-university"></i></div>
           <div class="timeline-body">
             <h4>Bachelor of Technology — Computer Science Engineering</h4>
             <div class="timeline-meta">Jawaharlal Nehru Technological University Anantapur (JNTUA) • 2024 - Present • CGPA: 8.3 (Current)</div>
@@ -490,7 +550,7 @@
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-left"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="timeline-left"><i class="fas fa-user-graduate"></i></div>
           <div class="timeline-body">
             <h4>Diploma — Computer Engineering</h4>
             <div class="timeline-meta">Sri Venkateswara Government Polytechnic, Tirupati • 2021 - 2024 • Percentage: 94%</div>
@@ -502,31 +562,53 @@
     <section class="section" id="certifications" aria-labelledby="certifications-title">
       <h3 class="title" id="certifications-title">Certifications</h3>
       <div class="timeline">
+        <!-- Certificate 1 -->
         <div class="timeline-item">
-          <div class="timeline-left"><i class="fa-solid fa-network-wired"></i></div>
+          <div class="timeline-left"> <i class="fas fa-network-wired"></i></div>
           <div class="timeline-body">
             <h4>Network Basics — Cisco Networking Academy</h4>
             <div class="timeline-meta">Issued: Apr 18 2025 — Hands-on with Cisco Packet Tracer</div>
+            <img src="certificates/cisco_python.png" alt="Network Basics Certificate" class="cert-thumb" onclick="showCert(this)">
           </div>
         </div>
 
+        <!-- Certificate 2 -->
         <div class="timeline-item">
-          <div class="timeline-left"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="timeline-left"><i class="fas fa-briefcase"></i></div>
           <div class="timeline-body">
             <h4>TCS iON Career Edge — Young Professional</h4>
             <div class="timeline-meta">Issued: Apr 27 2025 — Professional readiness & IT fundamentals</div>
+            <img src="certificates/tcs_ion.png" alt="TCS iON Certificate" class="cert-thumb" onclick="showCert(this)">
           </div>
         </div>
 
+        <!-- Certificate 3 -->
         <div class="timeline-item">
-          <div class="timeline-left"><i class="fa-brands fa-python"></i></div>
+          <div class="timeline-left"><i class="fas fa-cloud"></i></i></div>
           <div class="timeline-body">
+            <h4>Oracle Cloud Infrastructure (OCI) AI Foundations Associate certification</h4>
+            <div class="timeline-meta">Issued: Aug 18 2025 — AI Foundations</div>
+            <img src="certificates/Oracle_ai_foundation.png" alt="Oracle AI Foundation Certificate" class="cert-thumb" onclick="showCert(this)">
+          </div>
+        </div>
+
+        <!-- Certificate 4 -->
+        <div class="timeline-item">
+          <div class="timeline-left"> <i class="fab fa-python"></i></div>
+          <div class="timeline-body">
+            
             <h4>Python Programming — Cisco Networking Academy</h4>
             <div class="timeline-meta">Issued: Apr 8 2025 — Python basics & problem solving</div>
+            <img src="certificates/cisco_networks.png" alt="Python Certificate" class="cert-thumb" onclick="showCert(this)">
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Fullscreen container for clicked certificate -->
+    <div id="cert-overlay" onclick="hideCert()">
+      <img id="cert-full" src="" alt="Full certificate">
+    </div>
 
     <!-- Contact -->
     <section class="section" id="contact" aria-labelledby="contact-title">
@@ -535,8 +617,7 @@
       <div class="contact-grid">
         <div class="contact-card">
           <h4 style="margin:0 0 8px;">Email</h4>
-          <a href="mailto:saginala@example.com"><i class="fa-solid fa-envelope"></i> saginalaharikrishna6@gmail.com</a>
-          <p class="muted" style="margin-top:8px;">Prefer email — I usually reply within 1-2  days.</p>
+          <a href="mailto:saginalaharikrishna6@gmail.com"><i class="fa-solid fa-envelope"></i> saginalaharikrishna6@gmail.com</a>
         </div>
 
         <div class="contact-card">
@@ -557,6 +638,19 @@
   </div>
 
   <script>
+    function showCert(img) {
+      const overlay = document.getElementById('cert-overlay');
+      const fullImg = document.getElementById('cert-full');
+      
+      fullImg.src = img.src; // Set clicked image as fullscreen
+      overlay.style.display = 'flex'; // Show overlay
+    }
+
+    function hideCert() {
+      const overlay = document.getElementById('cert-overlay');
+      overlay.style.display = 'none'; // Hide overlay
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', function(e){
         const target = document.querySelector(this.getAttribute('href'));
