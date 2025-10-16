@@ -1,758 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        :root {
-            --primary: #00dbde;
-            --secondary: #fc00ff;
-            --card-bg: rgba(30, 30, 60, 0.5);
-        }
+  <!-- Basic meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Saginala Hari Krishna — Portfolio</title>
+  <meta name="description" content="Saginala Hari Krishna — 3rd Year Computer Science student. Projects: Smart Store, Expense Tracker, Weather App, To-do. Skills: HTML, CSS, JS, React, Node, MySQL." />
+  <meta name="author" content="Saginala Hari Krishna" />
 
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            position: relative;
-        }
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Saginala Hari Krishna — Portfolio" />
+  <meta property="og:description" content="3rd Year CSE student. Full-stack web developer with projects in React, Node.js, and MySQL." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="profile21.jpg" />
+  <meta property="og:url" content="/" />
 
-        /* Background patterns */
-        .bg-pattern {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            overflow: hidden;
-        }
+  <!-- Favicon -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
-        .dot {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-        }
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="" crossorigin="anonymous">
 
-        .triangle {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: rgba(100, 200, 255, 0.1);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            border-radius: 0 0 8px 8px;
-        }
+  <!-- Styles -->
+  <style>
+    :root{
+      --bg: #ffffff;
+      --muted: #6b7280;
+      --accent: #0f62fe; 
+      --accent-2: #0ea5a4;
+      --card: #f8fafc;
+      --glass: rgba(15,98,254,0.06);
+      --radius: 12px;
+      --max-width: 1100px;
+      --container-padding: 20px;
+      --shadow: 0 6px 18px rgba(15,23,42,0.06);
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: light;
+    }
 
-        .binary-digit {
-            position: absolute;
-            color: rgba(0, 255, 150, 0.3);
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            font-weight: bold;
-        }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-        .code-symbol {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.05);
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-        }
+    .wrap {
+      max-width: var(--max-width);
+      padding: calc(var(--container-padding) * 2);
+      margin: 36px auto;
+    }
 
-        /* Main content container */
-        .main-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 60px;
-            width: 85%;
-            max-width: 1200px;
-            padding: 40px;
-            margin: 50px auto;
-            background: rgba(30, 30, 60, 0.3);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            min-height: 60vh;
-        }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
 
-        /* Character section */
-        .character-container {
-            width: 300px;
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-        }
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .character {
-            border-radius: 100%;
-            width: 100%;
-            height: 100%; 
-           border: 3px solid rgb(57, 98, 220);
-            opacity: 0;
-            transform: translateY(-100px) rotateX(20deg);
-            filter: drop-shadow(0 10px 20px rgba(100, 200, 255, 0.4));
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-           
-        }
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid rgba(15,23,42,0.06);
+      box-shadow: var(--shadow);
+      background: #e6eefc;
+    }
 
-        /* Details section */
-        .details {
-            flex: 1;
-            max-width: 500px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease 0.3s;
-        }
+    .brand h1{
+      font-size:1rem;
+      margin:0;
+      font-weight:700;
+      letter-spacing: -0.02em;
+    }
+    .brand p{ margin:0; font-size:0.85rem; color:var(--muted); }
 
-        .name {
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 0 0 10px 0;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.1;
-        }
+    nav{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
 
-        .title {
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin: 0 0 20px 0;
-            color: rgba(255, 255, 255, 0.8);
-        }
+    .nav-link{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:600;
+      padding:8px 12px;
+      border-radius:8px;
+      transition: all 160ms ease;
+      font-size:0.92rem;
+    }
+    .nav-link:hover{ background: var(--card); color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow); }
 
-        .education {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 30px;
-        }
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:28px;
+      align-items:center;
+      background: linear-gradient(180deg, rgba(15,98,254,0.02), transparent);
+      padding:28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border:1px solid rgba(15,23,42,0.03);
+    }
 
-        .education span {
-            display: block;
-            margin-top: 5px;
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
+    .hero-left{ padding-right:12px; }
+    .eyebrow{ font-size:0.85rem; color:var(--muted); margin-bottom:8px; font-weight:600; }
+    .hero-title{ font-size:2rem; margin:0 0 10px; line-height:1.05; font-weight:800; color:#071233; }
+    .hero-sub{ color:var(--muted); margin:0 0 18px; font-size:1rem; max-width:60ch; }
 
-        /* Section Styling */
-        .section {
-            padding: 80px 20px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
+    .hero-cta{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:700;
+      font-size:0.95rem;
+      border:1px solid transparent;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:white;
+      box-shadow: 0 8px 20px rgba(14,165,164,0.12);
+    }
+    .btn-outline{
+      background: transparent;
+      color:var(--accent);
+      border:1px solid rgba(15,98,254,0.12);
+    }
 
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .profile-card{
+      background:var(--card);
+      border-radius:12px;
+      padding:18px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .profile-photo{
+      width:88px;
+      height:88px;
+      border-radius:10px;
+      object-fit:cover;
+      border:1px solid rgba(15,23,42,0.04);
+      background:linear-gradient(180deg,#eef6ff,#ffffff);
+    }
+    .profile-meta h3{ margin:0; font-size:1.05rem; }
+    .profile-meta p{ margin:6px 0 0; color:var(--muted); font-size:0.92rem; }
 
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-        }
+    /* Sections */
+    .section{
+      margin-top:30px;
+      padding:22px;
+      border-radius:12px;
+      background:transparent;
+    }
+    .section .title{
+      margin:0 0 18px;
+      font-size:1.25rem;
+      font-weight:800;
+      color:#071233;
+    }
 
-        /* Cards Grid */
-        .cards-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:22px;
+      align-items:start;
+    }
 
-        /* Social Media Cards */
-        .social-card {
-            width: 280px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-        }
+    .card{
+      background: #fff;
+      border-radius:12px;
+      padding:18px;
+      box-shadow: var(--shadow);
+      border:1px solid rgba(15,23,42,0.03);
+    }
 
-        .social-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(40, 40, 80, 0.7);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
+    .about-text{ color:var(--muted); line-height:1.6; font-size:0.98rem; }
 
-        .social-card:active {
-            transform: translateY(-5px);
-        }
+    /* Skills */
+    .skills-grid{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .skill-card{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      background:var(--glass);
+      padding:8px 10px;
+      border-radius:10px;
+      font-weight:700;
+      font-size:0.9rem;
+      color:#073b4c;
+      border:1px solid rgba(15,98,254,0.06);
+    }
+    .skill-card i{
+      flex-shrink:0;
+    }
 
-        .card-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
+    /* Projects */
+    .projects-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    .project{
+      display:flex;
+      flex-direction:column;
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid rgba(15,23,42,0.03);
+      box-shadow: var(--shadow);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      text-decoration:none;
+      color:inherit;
+    }
+    .project:hover{ transform: translateY(-6px); box-shadow: 0 14px 36px rgba(15,23,42,0.08); }
+    .project img{ width:100%; height:160px; object-fit:cover; display:block; }
+    .project-body{ padding:14px; }
+    .project-title{ margin:0; font-weight:800; font-size:1rem; }
+    .project-desc{ font-size:0.95rem; color:var(--muted); margin-top:8px; }
+    .project-tags{ margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+    .tag{ background:#eef2ff; padding:6px 8px; border-radius:8px; font-weight:700; font-size:0.8rem; color:#013a63; }
 
-        .linkedin { color: #0A66C2; }
-        .github { color: #f5f5f5; }
-        .youtube { color: #FF0000; }
+    /* Timeline */
+    .timeline{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .timeline-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      background:#fff;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,0.03);
+      box-shadow:var(--shadow);
+    }
+    .timeline-left{ width:8px; height:8px; margin-top:6px; border-radius:50%; background:var(--accent); flex:0 0 12px; }
+    .timeline-body h4{ margin:0; font-size:1rem; }
+    .timeline-meta{ color:var(--muted); font-size:0.9rem; margin-top:6px; }
 
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
+    /* Contact */
+    .contact-grid{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .contact-card{
+      flex:1 1 240px;
+      background:#fff;
+      padding:14px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .contact-card a{ text-decoration:none; color:var(--accent); font-weight:700; display:inline-flex; gap:8px; align-items:center; }
 
-        .card-desc {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.5;
-        }
+    footer{
+      margin-top:26px;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.9rem;
+      padding-bottom:40px;
+    }
 
-        /* Project Cards */
-        .project-card {
-            width: 350px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-        }
+    /* Responsive adjustments */
+    @media (max-width: 950px){
+      .hero{ grid-template-columns: 1fr; }
+      .two-col{ grid-template-columns: 1fr; }
+      .projects-grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px){
+      .projects-grid{ grid-template-columns: 1fr; }
+      header{ flex-direction:column; align-items:flex-start; gap:14px; }
+      .wrap{ padding:16px; }
+      .brand p{ display:none; }
+    }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(40, 40, 80, 0.7);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
+    .muted{ color:var(--muted); font-size:0.95rem; }
+    .center{ text-align:center; }
+    a.u{ color:inherit; text-decoration:underline; text-decoration-color: rgba(2,6,23,0.04); }
 
-        .project-card:active {
-            transform: translateY(-5px);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .project-content {
-            padding: 25px;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-            color: white;
-        }
-
-        .project-desc {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.5;
-        }
-
-        /* Education Cards */
-        .education-card {
-            width: 300px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-        }
-
-        .education-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            background: rgba(40, 40, 80, 0.7);
-        }
-
-        .education-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .education-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: white;
-        }
-
-        .education-institution {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 10px;
-        }
-
-        .education-details {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.5;
-        }
-
-        /* Certification Cards */
-        .certification-card {
-            width: 300px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-        }
-
-        .certification-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            background: rgba(40, 40, 80, 0.7);
-        }
-
-        .certification-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .certification-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: white;
-        }
-
-        .certification-issuer {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 10px;
-        }
-
-        .certification-date {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 15px;
-        }
-
-        .certification-desc {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.5;
-        }
-
-        /* Greeting Section */
-        .greeting {
-            padding: 100px 20px;
-            text-align: center;
-            background: linear-gradient(180deg, rgba(26, 26, 46, 0) 0%, rgba(26, 26, 46, 0.8) 50%);
-        }
-
-        .greeting-title {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-        }
-
-        .greeting-subtitle {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 20px;
-        }
-
-        /* Animation classes */
-        .animate-in {
-            opacity: 1;
-            transform: translateY(0) rotateX(0);
-        }
-
-        /* Animation for background elements */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .falling {
-            animation: fall linear infinite;
-        }
-
-        /* Responsive design */
-        @media (max-width: 900px) {
-            .main-container {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
-            
-            .details {
-                text-align: center;
-            }
-            
-            .cards-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </style>
 </head>
 <body>
-    <!-- Background patterns -->
-    <div class="bg-pattern" id="bgPattern"></div>
-    
-    <!-- Main content -->
-    <div class="main-container">
-        <div class="character-container">
-            <img src="profile21.jpg" alt="3D Character" class="character" id="character">
+  <div class="wrap" role="main">
+    <!-- Header -->
+    <header>
+      <a class="brand" href="#" aria-label="Homepage">
+        <img src="profile21.jpg" alt="Hari Krishna avatar" class="avatar" onerror="this.src='https://picsum.photos/200?blur=2'">
+        <div>
+          <h1>Saginala Hari Krishna</h1>
+          <p>3rd Year • Computer Science • JNTUA</p>
         </div>
-        
-        <div class="details" id="details">
-            <h1 class="name">Saginala Hari Krishna</h1>
-            <h2 class="title">Computer Science Student</h2>
-            <h2 class="title">3rd Year </h2>
+      </a>
 
-            <div class="education">
-                Bachelor of Technology
-                <span>Jawaharlal Nehru Technological University Anantapur (JNTUA)</span>
-            </div>
+      <nav aria-label="Main navigation">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#education">Education</a>
+        <a class="nav-link" href="#certifications">Certifications</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+        <div class="eyebrow">Hi — I'm</div>
+        <h2 id="hero-heading" class="hero-title">Saginala Hari Krishna</h2>
+        <p class="hero-sub">
+          A 3rd year Computer Science student at Jawaharlal Nehru Technological University Anantapur (JNTUA). I build
+          full-stack web applications using modern JavaScript (React, Node.js) and relational databases (MySQL).
+          Passionate about building practical solutions and learning cybersecurity & cloud fundamentals.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="resume.pdf" download aria-label="Download resume">
+            <i class="fa-solid fa-download"></i> Download Resume
+          </a>
+          <a class="btn btn-outline" href="#projects" aria-label="View projects">
+            <i class="fa-solid fa-book-open"></i> View Projects
+          </a>
+          <a class="btn" href="mailto:saginalaharikrishna6@gmail.com.com" style="background:#f3f4f6;border-radius:10px;font-weight:700;">
+            <i class="fa-solid fa-envelope"></i> Email Me
+          </a>
         </div>
+      </div>
+
+      <aside class="profile-card" aria-label="Profile info">
+        <img class="profile-photo" src="profile21.jpg" alt="Saginala profile" onerror="this.src='https://picsum.photos/200?blur=3'">
+        <div class="profile-meta">
+          <h3>Saginala Hari Krishna</h3>
+          <p>Computer Science Engineering — JNTUA</p>
+          <p class="muted" style="margin-top:8px;">Current CGPA: <strong>8.3</strong></p>
+          <p style="margin-top:10px;"><strong>Location:</strong> India</p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- About + Skills -->
+    <section class="section" id="about" aria-labelledby="about-title">
+  <h3 class="title" id="about-title">About</h3>
+
+  <!-- About Card -->
+  <div class="card" style="margin-bottom:20px;">
+    <p class="about-text">
+      Hello! I'm <strong>Saginala Hari Krishna</strong>, a third-year Computer Science student with experience building
+      web applications front-to-back. I enjoy converting ideas into code, focusing on clean design and reliable engineering.
+      My notable work includes building a Smart Store Management System, a Student-to-Student Marketplace, an Expense Tracker,
+      and a Weather App. I'm actively improving my backend skills (Node.js & MySQL) and learning cybersecurity basics.
+    </p>
+
+    <div style="margin-top:14px;">
+      <strong>Looking for:</strong>
+      <p class="muted" style="margin-top:8px;">Internships | Collaborations | Open-source contributions</p>
     </div>
+  </div>
 
-    <!-- Education Section -->
-    <section class="section" id="educationSection">
-        <h2 class="section-title">Education</h2>
-        <div class="cards-grid">
-            <div class="education-card">
-                <div class="education-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <h3 class="education-title">Bachelor of Technology</h3>
-                <div class="education-institution">Jawaharlal Nehru Technological University Anantapur</div>
-                <div class="education-details">
-                    <p>Computer Science Engineering</p>
-                    <p>2024 - Present</p>
-                    <p>CGPA: 8.3 (Current)</p>
-                </div>
+  <!-- Skills Card -->
+  <aside class="card" id="skills" aria-labelledby="skills-title" style="margin-bottom:20px;">
+    <h4 class="title" id="skills-title">Skills</h4>
+    <div style="display:flex; flex-direction:row; gap:10px;">
+      <div class="skill-card"><i class="fa-brands fa-html5" style="color:#E44D26;"></i><span>HTML</span></div>
+      <div class="skill-card"><i class="fa-brands fa-css3-alt" style="color:#1572B6;"></i><span>CSS</span></div>
+      <div class="skill-card"><i class="fa-brands fa-js-square" style="color:#F7DF1E;"></i><span>JavaScript</span></div>
+      <div class="skill-card"><i class="fa-brands fa-react" style="color:#61DAFB;"></i><span>React.js</span></div>
+      <div class="skill-card"><i class="fa-brands fa-node-js" style="color:#339933;"></i><span>Node.js</span></div>
+      <div class="skill-card"><i class="fa-solid fa-database" style="color:#4479A1;"></i><span>MySQL</span></div>
+      <div class="skill-card"><i class="fa-brands fa-python" style="color:#3776AB;"></i><span>Python</span></div>
+      <div class="skill-card"><i class="fa-brands fa-github"></i><span>Git & GitHub</span></div>
+    </div>
+  </aside>
+
+  <!-- Tools Card -->
+  <aside class="card" aria-labelledby="tools-title">
+    <h4 class="title" id="tools-title">Tools</h4>
+    <div style="display:flex; flex-direction:row; gap:10px;">
+      <div class="skill-card"><i class="fa-solid fa-code"></i><span>VSCode</span></div>
+      <div class="skill-card"><i class="fa-solid fa-paper-plane"></i><span>Postman</span></div>
+      <div class="skill-card"><i class="fa-brands fa-linux"></i><span>Linux</span></div>
+      <div class="skill-card"><i class="fa-solid fa-network-wired"></i><span>Cisco Packet Tracer</span></div>
+    </div>
+  </aside>
+</section>
+
+
+    
+
+
+
+    <!-- Projects -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <h3 class="title" id="projects-title">Selected Projects</h3>
+
+      <div class="projects-grid" role="list">
+        <!-- Project 1 -->
+        <a class="project" href="https://github.com/Saginala-harikrishna/college_students_store_project" target="_blank" rel="noopener" role="listitem" aria-label="Smart Store Management System project">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=60" alt="Smart Store project">
+          <div class="project-body">
+            <h4 class="project-title">SMART STORE MANAGEMENT SYSTEM</h4>
+            <p class="project-desc">Web platform to view store balance and transactions. Built with React.js, Node.js, Express, and MySQL for secure data handling.</p>
+            <div class="project-tags">
+              <span class="tag">React</span><span class="tag">Node</span><span class="tag">MySQL</span>
             </div>
-            
-            <div class="education-card">
-                <div class="education-icon">
-                    <i class="fas fa-book"></i>
-                </div>
-                <h3 class="education-title">Diploma</h3>
-                <div class="education-institution">Sri Venkateswara Government Polytechnic, Tirupati </div>
-                <div class="education-details">
-                    <p>Computer Engineering</p>
-                    <p>2021 - 2024</p>
-                    <p>Percentage: 94%</p>
-                </div>
+          </div>
+        </a>
+
+        <!-- Project 2 -->
+        <a class="project" href="https://saginala-harikrishna.github.io/js_expense_tracker/" target="_blank" rel="noopener" role="listitem" aria-label="Expense Tracker project">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=1400&q=60" alt="Expense Tracker">
+          <div class="project-body">
+            <h4 class="project-title">EXPENSE TRACKER</h4>
+            <p class="project-desc">Simple web app to record and categorize daily expenses. Built with vanilla JavaScript and localStorage for persistence.</p>
+            <div class="project-tags">
+              <span class="tag">JavaScript</span><span class="tag">HTML</span><span class="tag">LocalStorage</span>
             </div>
-            
-            <div class="education-card">
-                <div class="education-icon">
-                    <i class="fas fa-school"></i>
-                </div>
-                <h3 class="education-title">Secondary School</h3>
-                <div class="education-institution">Sri Maharashi High School, P</div>
-                <div class="education-details">
-                    <p>State Board</p>
-                    <p>2020 - 2021</p>
-                    <p>GPA: 10</p>
-                </div>
+          </div>
+        </a>
+
+        <!-- Project 3 -->
+        <a class="project" href="https://saginala-harikrishna.github.io/js_weather_project/" target="_blank" rel="noopener" role="listitem" aria-label="Weather App project">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?auto=format&fit=crop&w=1400&q=60" alt="Weather App">
+          <div class="project-body">
+            <h4 class="project-title">WEATHER APP</h4>
+            <p class="project-desc">Fetches real-time weather using city input. Focus on API integration and responsive UI.</p>
+            <div class="project-tags">
+              <span class="tag">API</span><span class="tag">JavaScript</span><span class="tag">Responsive</span>
             </div>
+          </div>
+        </a>
+
+        <!-- Project 4 -->
+        <a class="project" href="https://saginala-harikrishna.github.io/js-todo-list-project/dashboard.html" target="_blank" rel="noopener" role="listitem" aria-label="To-Do List project">
+          <img loading="lazy" src="https://images.pexels.com/photos/3987011/pexels-photo-3987011.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="To-do list">
+          <div class="project-body">
+            <h4 class="project-title">TO-DO LIST</h4>
+            <p class="project-desc">Task management web application to create, edit and delete tasks, improving productivity and tracking.</p>
+            <div class="project-tags">
+              <span class="tag">JavaScript</span><span class="tag">UI</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div style="margin-top:14px;">
+        <a class="u" href="#projects" aria-hidden="true">See more on GitHub →</a>
+      </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section class="section" id="education" aria-labelledby="education-title">
+      <h3 class="title" id="education-title">Education</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-left"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="timeline-body">
+            <h4>Bachelor of Technology — Computer Science Engineering</h4>
+            <div class="timeline-meta">Jawaharlal Nehru Technological University Anantapur (JNTUA) • 2024 - Present • CGPA: 8.3 (Current)</div>
+          </div>
         </div>
-    </section>
 
-    <!-- Certification Section -->
-    <section class="section" id="certificationSection">
-        <h2 class="section-title">Certifications</h2>
-        <div class="cards-grid">
-            <div class="certification-card">
-                <div class="certification-icon">
-                   
-                </div>
-                <h3 class="certification-title">Network Basics</h3>
-                <div class="certification-issuer">Cisco Networking Academy</div>
-                <div class="certification-date">Issued: Apr 18 2025</div>
-                <p class="certification-desc">This course deepened my understanding of essential networking concepts like IP addressing, routing, switching, and more. The hands-on experience with Cisco Packet Tracer made learning both practical and engaging.</p>
-            </div>
-            
-            <div class="certification-card">
-                <div class="certification-icon">
-                   
-                </div>
-                <h3 class="certification-title">TCS iON Career Edge – Young Professional program</h3>
-                <div class="certification-issuer">TCS</div>
-                <div class="certification-date">Issued: Apr 27 2025</div>
-                <p class="certification-desc">Completed the Professional Program by Tata Consultancy Services, gaining workplace readiness skills in communication, soft skills, resume writing, business etiquette, and career guidance. Also enhanced my knowledge in IT fundamentals, accounting basics, and an introduction to AI for professional growth.</p>
-            </div>
-            
-            <div class="certification-card">
-                <div class="certification-icon">
-                  
-                </div>
-                <h3 class="certification-title">Python Programming</h3>
-                <div class="certification-issuer">Cisco Networking Academy </div>
-                <div class="certification-date">Issued:  Apr 8 2025</div>
-                <p class="certification-desc">This course provided a solid foundation in Python programming, covering essential concepts such as variables, data types, control structures (if-else, loops), functions, and basic data structures like lists and dictionaries. The program also introduced problem-solving techniques using Python, which are fundamental for cybersecurity tasks and automation.</p>
-            </div>
-            
-        
+        <div class="timeline-item">
+          <div class="timeline-left"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="timeline-body">
+            <h4>Diploma — Computer Engineering</h4>
+            <div class="timeline-meta">Sri Venkateswara Government Polytechnic, Tirupati • 2021 - 2024 • Percentage: 94%</div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Social Media Section -->
-    <section class="section" id="socialSection">
-        <h2 class="section-title">Connect With Me</h2>
-        <div class="cards-grid">
-            <a href="https://www.linkedin.com/in/saginalaharikrishna/" target="_blank" class="social-card">
-                <div class="card-icon linkedin">
-                    <i class="fab fa-linkedin"></i>
-                </div>
-                <h3 class="card-title">LinkedIn</h3>
-                <p class="card-desc">Connect with me professionally and view my work experience and endorsements.</p>
-            </a>
-            
-            <a href="https://github.com/Saginala-harikrishna" target="_blank" class="social-card">
-                <div class="card-icon github">
-                    <i class="fab fa-github"></i>
-                </div>
-                <h3 class="card-title">GitHub</h3>
-                <p class="card-desc">Explore my coding projects and contributions to open source repositories.</p>
-            </a>
-            
-            <a href="https://www.youtube.com/@hrtalks96" target="_blank" class="social-card">
-                <div class="card-icon youtube">
-                    <i class="fab fa-youtube"></i>
-                </div>
-                <h3 class="card-title">YouTube</h3>
-                <p class="card-desc">Watch my tech tutorials, project walkthroughs, and coding challenges.</p>
-            </a>
+    <section class="section" id="certifications" aria-labelledby="certifications-title">
+      <h3 class="title" id="certifications-title">Certifications</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-left"><i class="fa-solid fa-network-wired"></i></div>
+          <div class="timeline-body">
+            <h4>Network Basics — Cisco Networking Academy</h4>
+            <div class="timeline-meta">Issued: Apr 18 2025 — Hands-on with Cisco Packet Tracer</div>
+          </div>
         </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section class="section" id="projectsSection">
-        <h2 class="section-title">My Projects</h2>
-        <div class="cards-grid">
-            <a href="https://github.com/Saginala-harikrishna/college_students_store_project" target="_blank" class="project-card">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="SAMS Project" class="project-image">
-                <div class="project-content">
-                    <h3 class="project-title">SMART STORE MANAGEMENT SYSTEM</h3>
-                    <p class="project-desc">A web-based platform that allows students to 
-                        easily view their store balance and transaction history. Developed using React.js,
-                         Node.js, Express.js, 
-                        and MySQL to ensure secure data handling and seamless user experience.</p>
-                </div>
-            </a>
-            
-            <a href="http://localhost:3000/" target="_blank" class="project-card">
-                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Seminar System" class="project-image">
-                <div class="project-content">
-                    <h3 class="project-title">STUDENT-TO-STUDENT MARKETPLACE</h3>
-                    <p class="project-desc"> A full-stack web application enabling students to buy, 
-                        sell, and request items within their campus community. Built with HTML, CSS, 
-                        JavaScript, Node.js, Express, and MySQL to provide 
-                        secure login, item management, and transaction tracking</p>
-                </div>
-            </a>
-
-             <a href="https://saginala-harikrishna.github.io/js_expense_tracker/" target="_blank" class="project-card">
-
-                <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=1470&q=80"
-                     alt="Expense Tracker"
-                     class="project-image"
-                     referrerpolicy="no-referrer"
-                     onerror="this.onerror=null;this.src='https://picsum.photos/1470/980?random=1';">
-
-                <div class="project-content">
-                    <h3 class="project-title">EXPENSE TRACKER</h3>
-                    <p class="project-desc"> Your Expense Tracker is a simple web application that helps users record, categorize,
-                         and monitor their daily expenses to better manage their finances</p>
-                </div>
-            </a>
-
-             <a href="https://saginala-harikrishna.github.io/js_weather_project/" target="_blank" class="project-card">
-                <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?auto=format&fit=crop&w=1470&q=80" 
-                     alt="Weather App" 
-                     class="project-image"
-                     referrerpolicy="no-referrer"
-                     onerror="this.onerror=null;this.src='https://picsum.photos/1470/980?random=4';">
-                <div class="project-content">
-                    <h3 class="project-title">WEATHER APP</h3>
-                    <p class="project-desc"> A simple Weather App that fetches real-time weather updates based on city or location input.</p>
-                </div>
-            </a>
-
-             <a href="https://saginala-harikrishna.github.io/js-todo-list-project/dashboard.html" target="_blank" class="project-card">
-         <img src="https://images.pexels.com/photos/3987011/pexels-photo-3987011.jpeg?auto=compress&cs=tinysrgb&w=1470"
-     alt="To-Do List App"
-     class="project-image">
-
-                <div class="project-content">
-                    <h3 class="project-title">TO-DO-LIST</h3>
-                    <p class="project-desc"> A To-Do List app that helps users organize tasks, set priorities, and boost productivity.</p>
-                </div>
-            </a>
+        <div class="timeline-item">
+          <div class="timeline-left"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="timeline-body">
+            <h4>TCS iON Career Edge — Young Professional</h4>
+            <div class="timeline-meta">Issued: Apr 27 2025 — Professional readiness & IT fundamentals</div>
+          </div>
         </div>
+
+        <div class="timeline-item">
+          <div class="timeline-left"><i class="fa-brands fa-python"></i></div>
+          <div class="timeline-body">
+            <h4>Python Programming — Cisco Networking Academy</h4>
+            <div class="timeline-meta">Issued: Apr 8 2025 — Python basics & problem solving</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Greeting Section -->
-    <section class="greeting">
-        <h2 class="greeting-title">Thanks for visiting! ✨</h2>
-        <div class="greeting-subtitle">Have a great day! 😊</div>
+    <!-- Contact -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <h3 class="title" id="contact-title">Get in touch</h3>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h4 style="margin:0 0 8px;">Email</h4>
+          <a href="mailto:saginala@example.com"><i class="fa-solid fa-envelope"></i> saginalaharikrishna6@gmail.com</a>
+          <p class="muted" style="margin-top:8px;">Prefer email — I usually reply within 1-2  days.</p>
+        </div>
+
+        <div class="contact-card">
+          <h4 style="margin:0 0 8px;">LinkedIn</h4>
+          <a href="https://www.linkedin.com/in/saginalaharikrishna/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i>saginalaharikrishna</a>
+        </div>
+
+        <div class="contact-card">
+          <h4 style="margin:0 0 8px;">GitHub</h4>
+          <a href="https://github.com/Saginala-harikrishna" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i>Saginala-harikrishna</a>
+        </div>
+      </div>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const character = document.getElementById('character');
-            const details = document.getElementById('details');
-            const bgPattern = document.getElementById('bgPattern');
-            const educationSection = document.getElementById('educationSection');
-            const certificationSection = document.getElementById('certificationSection');
-            const socialSection = document.getElementById('socialSection');
-            const projectsSection = document.getElementById('projectsSection');
-            
-            // Create background patterns
-            createBackgroundPatterns();
-            
-            // Animate character and details
-            setTimeout(() => {
-                character.classList.add('animate-in');
-                details.classList.add('animate-in');
-            }, 300);
+    <footer>
+      <div>© <strong>Saginala Hari Krishna</strong> — Built with care • <span class="muted">Last updated: Oct 2025</span></div>
+    </footer>
+  </div>
 
-            // Scroll animation for sections
-            function checkScroll() {
-                const sections = [educationSection, certificationSection, socialSection, projectsSection];
-                
-                sections.forEach(section => {
-                    const sectionPosition = section.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.3;
-                    
-                    if (sectionPosition < screenPosition) {
-                        section.classList.add('visible');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', checkScroll);
-            // Check on load in case content is already visible
-            checkScroll();
-
-            function createBackgroundPatterns() {
-                // Create dots
-                for (let i = 0; i < 50; i++) {
-                    const dot = document.createElement('div');
-                    dot.className = 'dot floating';
-                    dot.style.left = `${Math.random() * 100}%`;
-                    dot.style.top = `${Math.random() * 100}%`;
-                    dot.style.width = `${Math.random() * 4 + 1}px`;
-                    dot.style.height = dot.style.width;
-                    dot.style.animationDelay = `${Math.random() * 5}s`;
-                    bgPattern.appendChild(dot);
-                }
-
-                // Create triangles
-                for (let i = 0; i < 10; i++) {
-                    const triangle = document.createElement('div');
-                    triangle.className = 'triangle floating';
-                    triangle.style.left = `${Math.random() * 100}%`;
-                    triangle.style.top = `${Math.random() * 100}%`;
-                    triangle.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    triangle.style.animationDelay = `${Math.random() * 5}s`;
-                    bgPattern.appendChild(triangle);
-                }
-
-                // Create binary rain
-                for (let i = 0; i < 30; i++) {
-                    createBinaryStream();
-                }
-
-                // Create code symbols
-                const symbols = ['{', '}', '<', '>', '(', ')', '[', ']', ';', '=', '+', '-', '*', '/'];
-                for (let i = 0; i < 20; i++) {
-                    const symbol = document.createElement('div');
-                    symbol.className = 'code-symbol floating';
-                    symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                    symbol.style.left = `${Math.random() * 100}%`;
-                    symbol.style.top = `${Math.random() * 100}%`;
-                    symbol.style.fontSize = `${Math.random() * 10 + 10}px`;
-                    symbol.style.animationDelay = `${Math.random() * 5}s`;
-                    bgPattern.appendChild(symbol);
-                }
-            }
-
-            function createBinaryStream() {
-                const binary = document.createElement('div');
-                binary.className = 'binary-digit falling';
-                binary.textContent = Math.random() > 0.5 ? '0' : '1';
-                binary.style.left = `${Math.random() * 100}%`;
-                binary.style.top = '-20px';
-                binary.style.animationDuration = `${Math.random() * 5 + 3}s`;
-                bgPattern.appendChild(binary);
-
-                setTimeout(() => {
-                    binary.remove();
-                    createBinaryStream();
-                }, parseFloat(binary.style.animationDuration) * 1000);
-            }
-        });
-    </script>
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.setAttribute('tabindex','-1');
+          target.focus({preventScroll:true});
+        }
+      });
+    });
+  </script>
 </body>
 </html>
