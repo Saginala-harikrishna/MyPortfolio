@@ -12,7 +12,7 @@
   <meta property="og:title" content="Saginala Hari Krishna — Portfolio" />
   <meta property="og:description" content="3rd Year CSE student. Full-stack web developer with projects in React, Node.js, and MySQL." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="profile21.jpg" />
+  <meta property="og:image" content="profile.jpg" />
   <meta property="og:url" content="/" />
 
   <!-- Favicon -->
@@ -56,6 +56,10 @@
     }
     
     header {
+      position: sticky;
+       top: 0; 
+  z-index: 1000;
+  background: white;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -90,6 +94,7 @@
     .brand p{ margin:0; font-size:0.85rem; color:var(--muted); }
 
     nav{
+      position: sticky;
       display:flex;
       gap:12px;
       align-items:center;
@@ -494,7 +499,7 @@
     <!-- Header -->
     <header>
       <a class="brand" href="#" aria-label="Homepage">
-        <img src="profile.jpg" alt="Hari Krishna avatar" class="avatar" onerror="this.src='https://picsum.photos/200?blur=2'">
+        <img src="profile.jpg" alt="Hari Krishna avatar" onclick="showCert(this)" class="avatar" onerror="this.src='https://picsum.photos/200?blur=2'">
         <div>
           <h1>Saginala Hari Krishna</h1>
           <p>3rd Year • Computer Science • JNTUA</p>
